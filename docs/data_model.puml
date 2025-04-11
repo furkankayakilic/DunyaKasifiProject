@@ -1,0 +1,93 @@
+@startuml Dünya Kaşifi Veri Modeli
+
+' Stil tanımlamaları
+skinparam backgroundColor white
+skinparam class {
+  BackgroundColor LightBlue
+  ArrowColor DarkBlue
+  BorderColor DarkBlue
+}
+
+' Sınıflar
+class User {
+  +userId: string
+  +username: string
+  +email: string
+  +createdAt: datetime
+  +lastLogin: datetime
+  +avatar: Avatar
+  +equipment: Equipment
+  +progress: Progress
+}
+
+class Avatar {
+  +hairStyle: string
+  +eyeColor: string
+  +clothing: string
+  +accessories: string[]
+}
+
+class Equipment {
+  +binoculars: boolean
+  +compass: boolean
+  +notebook: boolean
+  +camera: boolean
+}
+
+class Progress {
+  +level: integer
+  +experience: integer
+  +badges: string[]
+  +visitedCountries: string[]
+}
+
+class Country {
+  +countryId: string
+  +name: string
+  +capital: string
+  +population: integer
+  +officialLanguage: string
+  +landmarks: Landmark[]
+  +culturalItems: CulturalItem[]
+  +languageLessons: LanguageLesson[]
+}
+
+class Landmark {
+  +landmarkId: string
+  +name: string
+  +description: string
+  +coordinates: Coordinates
+  +arModel: string
+}
+
+class CulturalItem {
+  +itemId: string
+  +type: string
+  +name: string
+  +description: string
+  +imageUrl: string
+}
+
+class LanguageLesson {
+  +lessonId: string
+  +phrase: string
+  +translation: string
+  +audioUrl: string
+  +difficulty: string
+}
+
+class Coordinates {
+  +latitude: float
+  +longitude: float
+}
+
+' İlişkiler
+User "1" *-- "1" Avatar
+User "1" *-- "1" Equipment
+User "1" *-- "1" Progress
+Country "1" *-- "many" Landmark
+Country "1" *-- "many" CulturalItem
+Country "1" *-- "many" LanguageLesson
+Landmark "1" *-- "1" Coordinates
+
+@enduml 
